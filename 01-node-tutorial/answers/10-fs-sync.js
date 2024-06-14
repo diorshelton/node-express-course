@@ -3,10 +3,12 @@
 const { readFileSync, writeFileSync } = require("fs");
 const path = "./temporary/fileA.txt";
 
-const data = "This is the first line that will be added to the file + \n";
-const dataTwo = "This is the second line that will be added to the file + \n";
+const data = "This is the first line that will be added to the file  \n";
+const dataTwo = "This is the second line that will be added to the file  \n";
 const dataThree = "This is the third line that will be added to the file";
 
-writeFileSync(path, `${data} ${dataTwo} ${dataThree}`, {encoding: "utf8", flag:"a"} );
+writeFileSync(path, data, {encoding: "utf8"} );
+writeFileSync(path, dataTwo, {encoding: "utf8", flag:"a"} );
+writeFileSync(path, dataThree, {encoding: "utf8", flag:"a"} );
 
 console.log(readFileSync(path, {encoding:"utf8"}))
