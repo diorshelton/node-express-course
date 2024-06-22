@@ -1,3 +1,5 @@
 /node_modules  
 .DS_Store  
 tempt.txt
+temp.txt
+big-file.js
