@@ -3,20 +3,18 @@ const { readFileSync } = require('fs');
 
 const customEmitter = new EventEmitter();
 
-// customEmitter.on('hello', (color, direction) => {
-//   console.log('data received: ', `${color}, ${direction}`);
-// });
+customEmitter.on('start', (color, direction) => {
+  console.log('data received: ', `${color}, ${direction}`);
+});
 
-// customEmitter.emit('hello', 'red', 'left')
+customEmitter.emit('start', 'red', 'left')
 
-
-
-let fileData = readFileSync('tempt.txt', {encoding:'utf8'})
-
-const countCharacters = (data, spaces) => {
-  let rawArray = data.split('');
+customEmitter.on('count', (charType) => {
+  let fileData = readFileSync('tempt.txt', {encoding:'utf8'})
+  let rawArray = fileData.split('');
   let spaces = 0;
   let newLineChar = 0;
+  let char = rawArray.length - spaces;
 
   for ( let string in rawArray) {
     if (rawArray[string] == '\n') {
@@ -25,13 +23,19 @@ const countCharacters = (data, spaces) => {
     if (rawArray[string] == ' ') {
       spaces ++
     }
-  } 
-  return {"New Line Chars:": newLineChar, "Spaces:": spaces};
-}
+  }
 
-customEmitter.on('count', () => {
-  console.log(countCharacters(fileData));
+  if (charType === "new lines") {
+    return console.log(`New Lines: ${newLineChar}`)
+  } 
+  if (charType === "characters") {
+    return console.log(`Characters: ${char}`) 
+  }
+  if (charType === "spaces") {
+    return console.log(`Spaces: ${spaces}`)
+  } else {
+    console.log(`New Lines: ${newLineChar}, Characters: ${char}, Spaces: ${spaces},`)
+  }
 })
 
-customEmitter.emit('count')
-// const emitter = new EventEmitter();
+customEmitter.emit('count', 'spaces')
