@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Working with node.js and express</h1>
+  <div id="products-section">
+    <h2>Products</h2>
+    <ul id="product-list">
+    </ul>
+  </div>
+
+  <button id="products-button" type="submit">Display products</button>
+
+  <script>
+    let productData = null;
+    let displayButton = document.getElementById('products-button');
+    displayButton.addEventListener("click", fetchProducts);
+
+    function generateHTMLStrings() {
+      let htmlStringArray = [];
+
+      for (let product of productData) {
+        let { id, name, price, desc } = product;
+
+        let htmlTemplate = `<article id=${id}}">
+          <h3>${name}</h3>
+          <p>${desc}</p>
+          <p>$${price}</p>
+        </article>`
+        htmlStringArray.push(htmlTemplate)
+      }
+      return htmlStringArray;
+    }
+
+    function addItemsToList() {
+      let items = generateHTMLStrings();
+      let list = document.getElementById('product-list');
+      let newListItem = document.createElement('li');
+
+      for (let item of items) {
+        list.innerHTML+= item
+      }
+    }
+
+    async function fetchProducts() {
+      if (productData === null) {
+        const response = await fetch(
+          'http://localhost:3000/api/v1/products',
+        );
+        productData = await response.json();
+        addItemsToList()
+      } else {
+        return
+      }
+    }
+  </script>
+</body>
+
+</html>
