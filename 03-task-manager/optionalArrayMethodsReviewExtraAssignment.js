@@ -124,7 +124,14 @@ object.behavior()
 // challenges are:
 //
 // - Create a new array with only each person's last name
+const lastNamesOnly = names.map(name => {
+  const [_, last] = name.split(' ');
+  return last;
+})
 // - Filter names that don't match the format "<first> <last>"
+let formatNamesFirstLast = names.filter( name => {
+  return name.split(' ').length === 2
+})
 //   - Should remove Tam because she has a double-space
 //   - Should remove Carlow because he has a middle-name
 //   - Should also remove names like:
@@ -134,6 +141,50 @@ object.behavior()
 //     - "Billy\nBob"
 //     - etc.
 // - Create a new array where everyone's name is converted to "Title Case"
+// ***
+// let titleCaseArrary = names.reduce((acc, name) => {
+//   name.split(" ")
+//   return accu
+  // }, [])
+  // ***
+// const titleCaseArrary = names.map( name => {
+//   const [first, middle ,last] = name.split(' ')
+//   let newFirstName = first[0].toUpperCase();
+//   let newMiddleName = middle[0].toUpperCase();
+//   let newLastName = last[0].toUpperCase();
+//   return `${newFirstName} ${newLastName}`;
+//   })
+let titleCaseArrary = names.map( name => {
+  const splitNames = name.split(' ');
+  for (let fullName of splitNames) {
+    for (let name of fullName) {
+      const nameArray = name;
+       
+    }
+    
+  }
+  let newFirstName = first[0].toUpperCase();
+  let newLastName = last[0].toUpperCase();
+  return newFirstName + la
+})
+// accepts names first, middle and last and returns each name with the first lettter capitalized
+const capitalizeNames = (splitNames) => {
+  for (let name of splitNames) {
+
+  }
+}
+
+let processNameString = (name) => {
+  let newString= "";
+
+  for (let i = 0; i < name.length; i++) {
+    if (i === 0) newString += (name[i].toUpperCase);
+    newString += name[i];
+  }
+
+  return newString
+}
+
 //   - The first character of each word should be uppercase
 //   - All other characters in the word should be lowercase
 //   - expected output is ['Dimitry Santiago', 'Carlos D. Perez', 'Tam Person', ...]
