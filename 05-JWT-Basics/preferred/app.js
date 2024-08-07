@@ -1,13 +1,15 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
+const pageRouter = require("./routes/main");
 
-app.get('/api/v1/hello', (req, res)=> {
-  res.send('<h1>Hello</h1>')
-})
+//middleware
+app.use(express.static("./public"));
+app.use(express.json());
 
-app.post('/api/v1/logon', (req, res) => {
-  res.send('<h1>Log on</h1>')
-})  
+// routes
+app.use("/api/v1/", pageRouter);
 
-const port = process.env.PORT || 3000
-app.listen( port, console.log(`Server is listening on ${port}`))
+const port = process.env.PORT || 3000;
+
+app.listen(port)
+console.log(`Server is listening on ${port}`);
