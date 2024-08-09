@@ -3,7 +3,8 @@ const router = express.Router()
 
 const {greeting, logOn} = require('../controllers/main')
 
-router.route('/logon').post(logOn)
-router.route('/hello').get(greeting)
+const authMiddleWare = require('../middleware/auth')
 
+router.route('/logon').post(logOn)
+router.route('/hello').get(authMiddleWare, greeting)
 module.exports = router
